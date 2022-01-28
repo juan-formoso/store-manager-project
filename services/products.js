@@ -1,7 +1,7 @@
 const productsModel = require('../models/products');
 
 const validateName = async (name) => {
-  const productExists = await productsModel.productExists(name);
+  const productExists = name ? await productsModel.productExists(name) : false;
   switch (true) {
     case name === undefined:
       return { code: 400, message: '"name" is required' };
@@ -24,7 +24,7 @@ const validateQuantity = (quantity) => {
     case typeof quantity === 'string' || quantity < 1:
       return {
         code: 422,
-        message: '"quantity" must be a number larger than or equal to 1',
+        message: '"quantity" must be larger or equal to 1',
       };
     default:
       return {};
@@ -33,12 +33,11 @@ const validateQuantity = (quantity) => {
 
 const validateProduct = async (name, quantity) => {
   const nameValidation = await validateName(name);
-  const productValidation = validateQuantity(quantity);
   switch (true) {
     case nameValidation.code !== undefined:
       return nameValidation;
-    case productValidation.code !== undefined:
-      return productValidation;
+    case validateQuantity(quantity).code !== undefined:
+      return validateQuantity(quantity);
     default:
       return {};
   }
