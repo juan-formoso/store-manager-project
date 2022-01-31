@@ -4,7 +4,6 @@ const Importer = require("mysql-import");
 require("dotenv").config();
 
 describe("Products", () => {
-  jest.setTimeOut(150000);
   const products = [
     { name: "Martelo de Thor", quantity: 10 },
     { name: "Traje de encolhimento", quantity: 20 },
