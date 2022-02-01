@@ -35,7 +35,7 @@ const productAlreadyExists = async (req, res, next) => {
 
 const createProduct = async (req, res) => {
   const { name, quantity } = req.body;
-  const newProduct = await insertProduct.create({ name, quantity });
+  const newProduct = await insertProduct(name, quantity);
   return res.status(201).json(newProduct);
 };
 
