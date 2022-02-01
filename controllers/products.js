@@ -39,4 +39,4 @@ const createProduct = async (req, res) => {
   return res.status(201).json(newProduct);
 };
 
-module.exports = { nameValidation, quantityValidation, createProduct, productAlreadyExists };
+module.exports = { nameValidation, quantityValidation, productAlreadyExists, createProduct };
