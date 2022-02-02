@@ -13,6 +13,6 @@ const {
 router.post('/', nameValidation, quantityValidation, productAlreadyExists, createProduct);
 router.get('/', getAllProducts);
 router.get('/:id', getProductById);
-router.put('/:id', updateProduct);
+router.put('/:id', nameValidation, quantityValidation, updateProduct);
 
 module.exports = router;
