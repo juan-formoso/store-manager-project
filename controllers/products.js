@@ -1,4 +1,10 @@
-const { insertProduct, getByName, getProducts, getById } = require('../models/products');
+const { 
+  insertProduct, 
+  getByName, 
+  getProducts, 
+  getById, 
+  update,
+} = require('../models/products');
 
 const nameValidation = async (req, res, next) => {
   const { body } = req;
@@ -53,6 +59,16 @@ const getProductById = async (req, res) => {
   return res.status(200).json(product);
 };
 
+const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name, quantity } = req.body;
+  const updatedProduct = await update({ id, name, quantity });
+  if (!updatedProduct) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  return res.status(200).json(updatedProduct);
+};
+
 module.exports = { 
   nameValidation, 
   quantityValidation, 
@@ -60,4 +76,5 @@ module.exports = {
   createProduct, 
   getAllProducts,
   getProductById,
+  updateProduct,
 };
