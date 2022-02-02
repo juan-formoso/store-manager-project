@@ -78,7 +78,8 @@ const updateProduct = async (req, res) => {
 
 const excludeProduct = async (req, res) => {
   const { id } = req.params;
-  const deletedProduct = await deleteProduct(id);
+  const deletedProduct = await getById(id);
+  await deleteProduct(id);
   return res.status(200).json(deletedProduct);
 };
 
