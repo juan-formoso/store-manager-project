@@ -14,6 +14,6 @@ const {
 router.post('/', nameValidation, quantityValidation, productAlreadyExists, createProduct);
 router.get('/', getAllProducts);
 router.get('/:id', getProductById);
-router.put('/:id', nameValidation, quantityValidation, updateProduct, productNotFound);
+router.put('/:id', nameValidation, quantityValidation, productNotFound, updateProduct);
 
 module.exports = router;
