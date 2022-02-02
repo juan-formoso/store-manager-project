@@ -4,6 +4,7 @@ const {
   getProducts, 
   getById, 
   update,
+  deleteProduct,
 } = require('../models/products');
 
 const nameValidation = async (req, res, next) => {
@@ -75,6 +76,12 @@ const updateProduct = async (req, res) => {
   return res.status(200).json(updatedProduct);
 };
 
+const excludeProduct = async (req, res) => {
+  const { id } = req.params;
+  const deletedProduct = await deleteProduct(id);
+  return res.status(200).json(deletedProduct);
+};
+
 module.exports = { 
   nameValidation, 
   quantityValidation, 
@@ -84,4 +91,5 @@ module.exports = {
   getProductById,
   updateProduct,
   productNotFound,
+  excludeProduct,
 };
