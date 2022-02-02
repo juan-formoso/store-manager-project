@@ -8,11 +8,12 @@ const {
   getAllProducts,
   getProductById,
   updateProduct,
+  productNotFound,
 } = require('../controllers/products');
 
 router.post('/', nameValidation, quantityValidation, productAlreadyExists, createProduct);
 router.get('/', getAllProducts);
 router.get('/:id', getProductById);
-router.put('/:id', nameValidation, quantityValidation, updateProduct);
+router.put('/:id', nameValidation, quantityValidation, updateProduct, productNotFound);
 
 module.exports = router;
