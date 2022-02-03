@@ -1,21 +1,3 @@
-/* 
-const quantityValidation = async (req, res, next) => {
-  const { body } = req;
-  const arr = body.map(({ quantity }) => quantity);
-  arr.forEach((quantity) => {
-    if (!quantity && quantity !== 0) {
-      return res.status(400).json({ message: '"quantity" is required' });
-    }
-    if (typeof quantity !== 'number' || quantity < 1) {
-      return res.status(422).json({ 
-        message: '"quantity" must be a number larger than or equal to 1',
-      });
-    }
-  });
-  next();
-};
-*/
-
 const { insertSale } = require('../models/sales');
 
 const productIdValidation = async (req, res, next) => {
@@ -25,36 +7,20 @@ const productIdValidation = async (req, res, next) => {
   next();
 };
 
-/* const quantityValidation = async (req, res, next) => {
+const quantityValidation = async (req, res, next) => {
   const sales = req.body;
   const quantity = sales.every((sale) => (Object.keys(sale).includes('quantity')));
   const quantityIsNumber = sales.every((sale) => (
-    typeof sale.quantity === 'number' && sale.quantity >= 1
+    typeof sale.quantity === 'number' && sale.quantity > 0
   ));
-  if (!quantity && quantity !== 0) {
+  if (!quantity) {
     return res.status(400).json({ message: '"quantity" is required' });
   }
-  if (typeof quantityIsNumber !== 'number' || quantityIsNumber < 1) {
+  if (!quantityIsNumber) {
     return res.status(422).json({ 
       message: '"quantity" must be a number larger than or equal to 1',
     });
   }
-  next();
-}; */
-
-const quantityValidation = async (req, res, next) => {
-  const { body } = req;
-  const arr = body.map(({ quantity }) => quantity);
-  arr.forEach((quantity) => {
-    if (!quantity && quantity !== 0) {
-      return res.status(400).json({ message: '"quantity" is required' });
-    }
-    if (typeof quantity !== 'number' || quantity < 1) {
-      return res.status(422).json({ 
-        message: '"quantity" must be a number larger than or equal to 1',
-      });
-    }
-  });
   next();
 };
 
