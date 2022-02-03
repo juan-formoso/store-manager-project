@@ -55,7 +55,7 @@ const createProduct = async (req, res) => {
   return res.status(201).json(newProduct);
 };
 
-const getAllProducts = async (req, res) => {
+const getAllProducts = async (_req, res) => {
   const productsList = await getProducts();
   return res.status(200).json(productsList);
 };
