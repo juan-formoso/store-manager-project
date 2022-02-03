@@ -1,18 +1,15 @@
-/* const salesRouter = require('express').Router();
-const { idValidation, quantityValidation, createSale } = require('../controllers/sales');
-
-salesRouter.post('/', idValidation, quantityValidation, createSale);
-
-module.exports = salesRouter;
- */
-
 const salesRouter = require('express').Router();
 const { 
   productIdValidation, 
   quantityValidation,
   createSale,
+  getAllSales,
+  getSaleById,
+  saleNotFound,
 } = require('../controllers/sales');
 
 salesRouter.post('/', productIdValidation, quantityValidation, createSale);
+salesRouter.get('/', getAllSales);
+salesRouter.get('/id', saleNotFound, getSaleById);
 
 module.exports = salesRouter;
