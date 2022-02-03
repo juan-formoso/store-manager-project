@@ -1,17 +1,23 @@
 const connection = require('./connection');
 
-const insertSale = async (sales) => {
-  const [rows] = await connection.execute(
-    'INSERT INTO sales VALUES ()',
-  );
-    console.log(rows.insertId);
-  await sales.forEach(async ({ product_id: productId, quantity }) => {
-    await connection.execute(
-      'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
-        [rows.insertId, productId, quantity],
-    );
+const salesValues = (sales, id) => {
+  let values = '';
+  sales.forEach(({ product_id: productId, quantity }, i) => {
+    if (i) {
+      values += `, (${id}, ${productId}, ${quantity})`;
+    } else values += `(${id}, ${productId}, ${quantity})`;
   });
+  return values;
+};
 
+const insertSale = async (sales) => {
+  const [rows] = await connection.execute('INSERT INTO sales VALUES ()');
+  await connection.execute(
+    `INSERT INTO sales_products (sale_id, product_id, quantity) VALUES ${salesValues(
+      sales,
+      rows.insertId,
+    )}`,
+  );
   return {
     id: rows.insertId,
     itemsSold: sales,
