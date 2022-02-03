@@ -70,7 +70,9 @@ const productIdValidation = async (req, res, next) => {
 const quantityValidation = async (req, res, next) => {
   const sales = req.body;
   const quantity = sales.every((sale) => (Object.keys(sale).includes('quantity')));
-  const quantityIsNumber = sales.every((sale) => (typeof sale.quantity === 'number'));
+  const quantityIsNumber = sales.every((sale) => (
+    typeof sale.quantity === 'number' && sale.quantity >= 1
+  ));
   if (!quantity && quantity !== 0) {
     return res.status(400).json({ message: '"quantity" is required' });
   }
