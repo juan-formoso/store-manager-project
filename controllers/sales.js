@@ -24,14 +24,14 @@ const quantityValidation = async (req, res, next) => {
   next();
 };
 
-const saleNotFound = async (req, res, next) => {
+/* const saleNotFound = async (req, res, next) => {
   const { id } = req.params;
   const sale = await getById(id);
   if (!sale || sale.length === 0) {
     return res.status(404).json({ message: 'Sale not found' });
   }
   next();
-};
+}; */
 
 const createSale = async (req, res) => {
   const sales = req.body;
@@ -47,14 +47,16 @@ const getAllSales = async (_req, res) => {
 const getSaleById = async (req, res) => {
   const { id } = req.params;
   const sales = await getById(id);
+  if (!sales) {
+    return res.status(404).json({ message: 'Sale not found' });
+  }
   return res.status(200).json(sales);
 };
 
 module.exports = { 
   createSale, 
   productIdValidation, 
-  quantityValidation, 
-  saleNotFound, 
+  quantityValidation,
   getAllSales, 
   getSaleById,
 };

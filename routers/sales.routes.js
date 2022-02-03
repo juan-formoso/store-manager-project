@@ -5,11 +5,10 @@ const {
   createSale,
   getAllSales,
   getSaleById,
-  saleNotFound,
 } = require('../controllers/sales');
 
 salesRouter.post('/', productIdValidation, quantityValidation, createSale);
 salesRouter.get('/', getAllSales);
-salesRouter.get('/id', saleNotFound, getSaleById);
+salesRouter.get('/id', getSaleById);
 
 module.exports = salesRouter;
