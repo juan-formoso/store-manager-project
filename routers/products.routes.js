@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const productRouter = require('express').Router();
 
 const { 
   nameValidation, 
@@ -12,10 +12,10 @@ const {
   deleteProduct,
 } = require('../controllers/products');
 
-router.post('/', nameValidation, quantityValidation, productAlreadyExists, createProduct);
-router.get('/', getAllProducts);
-router.get('/:id', getProductById);
-router.put('/:id', nameValidation, quantityValidation, productNotFound, updateProduct);
-router.delete('/:id', productNotFound, deleteProduct);
+productRouter.post('/', nameValidation, quantityValidation, productAlreadyExists, createProduct);
+productRouter.get('/', getAllProducts);
+productRouter.get('/:id', getProductById);
+productRouter.put('/:id', nameValidation, quantityValidation, productNotFound, updateProduct);
+productRouter.delete('/:id', productNotFound, deleteProduct);
 
-module.exports = router;
+module.exports = productRouter;
