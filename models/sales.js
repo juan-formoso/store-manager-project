@@ -15,16 +15,25 @@ const insertSale = async (sales) => {
 
 const getSales = async () => {
   const [rows] = await connection.execute(
-    `SELECT sale_id, date, product_id, quantity 
-    FROM sales JOIN sales_products ON id = sale_id;`,
+    `SELECT s.id AS saleId, s.date AS date, p.id AS product_id, sp.quantity AS quantity
+    FROM StoreManager.sales_products AS sp
+    INNER JOIN StoreManager.products AS p
+    ON sp.product_id = p.id
+    INNER JOIN StoreManager.sales AS s
+    ON sp.sale_id = s.id;`,
   );
-  return rows.map(({ sale_id: saleId, ...rest }) => ({ saleId, ...rest }));
+  return rows;
 };
 
 const getById = async (id) => {
   const [rows] = await connection.execute(
-    `SELECT date, product_id, quantity FROM sales 
-    JOIN sales_product ON id = sale_id WHERE id = ?;`, [id],
+    `SELECT s.id AS sale_id, s.date AS date, p.id AS product_id, sp.quantity AS quantity
+    FROM StoreManager.sales_products AS sp
+    INNER JOIN StoreManager.products AS p
+    ON sp.product_id = p.id
+    INNER JOIN StoreManager.sales AS s
+    ON sp.sale_id = s.id
+    WHERE s.id = ?`, [id],
   );
   return rows;
 };
