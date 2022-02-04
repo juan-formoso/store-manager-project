@@ -25,12 +25,6 @@ const quantityValidation = async (req, res, next) => {
   next();
 };
 
-const createSale = async (req, res) => {
-  const sales = req.body;
-  const newSale = await insertSale(sales);
-  return res.status(201).json(newSale);
-};
-
 const saleNotFound = async (req, res, next) => {
   const { id } = req.params;
   const salesId = await getById(id);
@@ -40,6 +34,12 @@ const saleNotFound = async (req, res, next) => {
   next();
 };
 
+const createSale = async (req, res) => {
+  const sales = req.body;
+  const newSale = await insertSale(sales);
+  return res.status(201).json(newSale);
+};
+
 const getAllSales = async (_req, res) => {
   const salesList = await getSales();
   return res.status(200).json(salesList);
@@ -47,7 +47,7 @@ const getAllSales = async (_req, res) => {
 
 const getSaleById = async (req, res) => {
   const { id } = req.params;
-  const sales = await getById(id);
+  const sales = await getById(Number(id));
   return res.status(200).json(sales);
 };
 
