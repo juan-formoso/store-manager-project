@@ -1,4 +1,5 @@
-const { insertSale, getSales, getById } = require('../models/sales');
+const { insertSale } = require('../models/sales');
+const { getSales, getById } = require('../services/sales');
 
 const productIdValidation = async (req, res, next) => {
   const sales = req.body;
@@ -20,6 +21,15 @@ const quantityValidation = async (req, res, next) => {
     return res.status(422).json({ 
       message: '"quantity" must be a number larger than or equal to 1',
     });
+  }
+  next();
+};
+
+const saleNotFound = async (req, res, next) => {
+  const { id } = req.params;
+  const salesId = await getById(id);
+  if (salesId.length === 0) {
+    return res.status(404).json({ message: 'Sale not found' });
   }
   next();
 };
@@ -48,6 +58,7 @@ module.exports = {
   createSale, 
   productIdValidation, 
   quantityValidation,
+  saleNotFound,
   getAllSales, 
   getSaleById,
 };
