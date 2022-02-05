@@ -13,7 +13,7 @@ const insertSale = async (sales) => {
   return { id, itemsSold: sales };
 };
 
-const getSales = async () => {
+/* const getSales = async () => {
   const [rows] = await connection.execute(
     `SELECT s.id AS saleId, s.date AS date, p.id AS product_id, sp.quantity AS quantity
     FROM StoreManager.sales_products AS sp
@@ -36,6 +36,6 @@ const getById = async (id) => {
     WHERE s.id = ?`, [id],
   );
   return rows;
-};
+}; */
 
-module.exports = { insertSale, getSales, getById };
+module.exports = { insertSale/* , getSales, getById */ };
