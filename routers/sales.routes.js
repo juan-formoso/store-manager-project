@@ -3,13 +3,13 @@ const {
   productIdValidation, 
   quantityValidation,
   createSale,
-  saleNotFound,
+  /* saleNotFound,
   getAllSales,
-  getSaleById,
+  getSaleById, */
 } = require('../controllers/sales');
 
 salesRouter.post('/', productIdValidation, quantityValidation, createSale);
-salesRouter.get('/', getAllSales);
-salesRouter.get('/id', saleNotFound, getSaleById);
+salesRouter.get('/'/* , getAllSales */);
+salesRouter.get('/id'/* , saleNotFound, getSaleById */);
 
 module.exports = salesRouter;
