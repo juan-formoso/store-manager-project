@@ -28,11 +28,11 @@ const getById = async (req, res) => {
   }
 };
 
-const update = async (req, res) => {
+const updateProduct = async (req, res) => {
   try {
     const { name, quantity } = req.body;
     const { id } = req.params;
-    const response = await services.update({ id, name, quantity });
+    const response = await services.updateProduct({ id, name, quantity });
     return res.status(200).json(response);
   } catch (error) {
     return error;
@@ -54,6 +54,6 @@ module.exports = {
   createProduct,
   getAll,
   getById,
-  update,
+  updateProduct,
   deleteById,
 };
