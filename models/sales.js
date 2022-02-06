@@ -45,7 +45,7 @@ const insertSale = async (saleId, sales) => {
   }
 };
 
-const updateQuantityCreate = async ({ product_id: productId, quantity }) => {
+const deleteQuantity = async ({ product_id: productId, quantity }) => {
   try {
     await connection.execute(
       `UPDATE StoreManager.products SET quantity = quantity - ?
@@ -109,7 +109,7 @@ const deleteById = async (id) => {
   }
 };
 
-const updateQuantityDelete = async (quantity, productId) => {
+const updateQuantity = async (quantity, productId) => {
   try {
     await connection.execute(
       `UPDATE StoreManager.products SET quantity = quantity + ?
@@ -135,11 +135,11 @@ module.exports = {
   saleID,
   newSale,
   insertSale,
-  updateQuantityCreate,
+  deleteQuantity,
   getAll,
   getById,
   updateSale,
   deleteById,
-  updateQuantityDelete,
+  updateQuantity,
   getProductQuantity,
 };
