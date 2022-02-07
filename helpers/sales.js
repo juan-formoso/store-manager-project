@@ -33,7 +33,7 @@ const quantityIsNumber = (req, res, next) => {
 const amountValidation = async (req, res, next) => {
   const { body } = req;
   const quantityBody = body.map(async ({ product_id: productId }) => {
-    const arrayQuantity = await services.getQuantityProducts(productId);
+    const arrayQuantity = await services.getProductQuantity(productId);
     return arrayQuantity;
   });
   const arrayQuantity = await Promise.all(quantityBody);
