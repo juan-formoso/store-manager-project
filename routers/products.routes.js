@@ -1,21 +1,46 @@
 const productRouter = require('express').Router();
 
 const { 
-  nameValidation, 
-  quantityValidation, 
-  productAlreadyExists, 
   createProduct,
-  getAllProducts,
-  getProductById,
+  getAll,
+  getById,
   updateProduct,
-  productNotFound,
-  deleteProduct,
+  deleteById,
 } = require('../controllers/products');
 
-productRouter.post('/', nameValidation, quantityValidation, productAlreadyExists, createProduct);
-productRouter.get('/', getAllProducts);
-productRouter.get('/:id', getProductById);
-productRouter.put('/:id', nameValidation, quantityValidation, productNotFound, updateProduct);
-productRouter.delete('/:id', productNotFound, deleteProduct);
+const { 
+  nameValidation,
+  nameSize,
+  quantityValidation,
+  quantityIsInteger,
+  uniqueName,
+  idValidation,
+} = require('../helpers/products');
+
+productRouter.post(
+  '/', 
+  nameValidation, 
+  nameSize, 
+  quantityValidation, 
+  quantityIsInteger, 
+  uniqueName, 
+  createProduct,
+);
+
+productRouter.get('/', getAll);
+
+productRouter.get('/:id', getById);
+
+productRouter.put(
+  '/:id', 
+  idValidation, 
+  nameValidation, 
+  nameSize, 
+  quantityValidation, 
+  quantityIsInteger, 
+  updateProduct,
+);
+
+productRouter.delete('/:id', idValidation, deleteById);
 
 module.exports = productRouter;
