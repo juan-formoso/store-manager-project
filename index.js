@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const productRouter = require('./routers/products.routes');
 const salesRouter = require('./routers/sales.routes');
-// Comment to commit
+require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
