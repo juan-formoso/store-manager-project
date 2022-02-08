@@ -310,10 +310,10 @@ describe('Testa productsService', () => {
   });
   describe('Testa deleteById', () => {
     const id = 1;
-    const id = { id: 1 }
+    const productId = { id: 1 }
     describe('Ao deletar um produto com sucesso', () => {
       before(async () => {
-        const execute = id;
+        const execute = productId;
         sinon.stub(productsModel, 'deleteById').resolves(execute);
       });
       after(async () => {
