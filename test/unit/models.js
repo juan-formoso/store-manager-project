@@ -32,19 +32,18 @@ describe('Testa productsModel', () => {
         connection.execute.restore();
       });
       it('Ao retornar um objeto', async () => {
-        const newProduct = await productsModel.create(productQuantity);
+        const newProduct = await productsModel.insertProduct(productQuantity);
         expect(newProduct).to.be.a('object');
       });
       it('Ao retornar um objeto com as propriedades "id", "name" e "quantity"', async () => {
-        const newProduct = await productsModel.create(productQuantity);
+        const newProduct = await productsModel.insertProduct(productQuantity);
         expect(newProduct).to.have.a.property('id');
         expect(newProduct).to.have.a.property('name');
         expect(newProduct).to.have.a.property('quantity');
       });
-
       it('Ao retornar o objeto corretamente', async () => {
         const result = { "id": 1, "name": "produto", "quantity": 10 };
-        const newProduct = await productsModel.create(productQuantity);
+        const newProduct = await productsModel.insertProduct(productQuantity);
         expect(newProduct).to.be.deep.equal(result);
       });
     });
@@ -57,11 +56,11 @@ describe('Testa productsModel', () => {
         connection.execute.restore();
       });
       it('Ao retornar a mensagem de erro', async () => {
-        const newProduct = await productsModel.create(productQuantity);
+        const newProduct = await productsModel.insertProduct(productQuantity);
         expect(newProduct).to.be.deep.equal(error);
       });
       it('Ao retornar um objeto contendo as propriedades "error", "codeStatus" e "message"', async () => {
-        const newProduct = await productsModel.create(productQuantity);
+        const newProduct = await productsModel.insertProduct(productQuantity);
         expect(newProduct).to.be.a('object');
         expect(newProduct).to.have.property('error');
         expect(newProduct).to.have.property('codeStatus');
@@ -312,18 +311,18 @@ describe('Testa productsModel', () => {
         connection.execute.restore();
       });
       it('Retorna um objeto', async () => {
-        const updatedProduct = await productsModel.update(productQuantity);
+        const updatedProduct = await productsModel.updateProduct(productQuantity);
         expect(updatedProduct).to.be.a('object');
       });
       it('O objeto contém as propriedades "id", "name" e "quantity"', async () => {
-        const updatedProduct = await productsModel.update(productQuantity);
+        const updatedProduct = await productsModel.updateProduct(productQuantity);
         expect(updatedProduct).to.have.a.property('id');
         expect(updatedProduct).to.have.a.property('name');
         expect(updatedProduct).to.have.a.property('quantity');
       });
       it('Retorna o objeto esperado', async () => {
         const result = { "id": 1, "name": "produto alterado", "quantity": 5 };
-        const updatedProduct = await productsModel.update(productQuantity);
+        const updatedProduct = await productsModel.updateProduct(productQuantity);
         expect(updatedProduct).to.be.deep.equal(result);
       });
     });
@@ -336,11 +335,11 @@ describe('Testa productsModel', () => {
         connection.execute.restore();
       });
       it('Retorna a mensagem de erro', async () => {
-        const updatedProduct = await productsModel.update(productQuantity);
+        const updatedProduct = await productsModel.updateProduct(productQuantity);
         expect(updatedProduct).to.be.deep.equal(error);
       });
       it('A mensagem possui as propriedades "error", "codeStatus" e "message"', async () => {
-        const updatedProduct = await productsModel.create(productQuantity);
+        const updatedProduct = await productsModel.insertProduct(productQuantity);
         expect(updatedProduct).to.be.a('object');
         expect(updatedProduct).to.have.property('error');
         expect(updatedProduct).to.have.property('codeStatus');
