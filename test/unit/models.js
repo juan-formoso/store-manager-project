@@ -228,12 +228,12 @@ describe('Testa productsModel', () => {
         connection.execute.restore();
       });
       it('Retornará um array', async () => {
-        const id = await productsModel.getById(30);
-        expect(id).to.be.a('array');
+        const productId = await productsModel.getById(30);
+        expect(productId).to.be.a('array');
       });
       it('Retornará um array vazio', async () => {
-        const id = await productsModel.getById(30);
-        expect(id).to.be.empty;
+        const productId = await productsModel.getById(30);
+        expect(productId).to.be.empty;
       });
     });
     describe('Se o "id" for passado corretamente', () => {
@@ -251,18 +251,18 @@ describe('Testa productsModel', () => {
         connection.execute.restore();
       });
       it('Ao retornar um objeto', async () => {
-        const id = await productsModel.getById(2);
-        expect(id).to.be.an('object');
+        const productId = await productsModel.getById(2);
+        expect(productId).to.be.an('object');
       });
       it('Objeto vazio', async () => {
-        const id = await productsModel.getById(2);
-        expect(id).to.be.not.empty;
+        const productId = await productsModel.getById(2);
+        expect(productId).to.be.not.empty;
       });
       it('Se o produto possui as propriedades "id", "name", "quantity"', async () => {
-        const id = await productsModel.getById(2);
-        expect(id).to.be.a.property('id');
-        expect(id).to.be.a.property('name');
-        expect(id).to.be.a.property('quantity');
+        const productId = await productsModel.getById(2);
+        expect(productId).to.be.a.property('id');
+        expect(productId).to.be.a.property('name');
+        expect(productId).to.be.a.property('quantity');
       });
       it('Retorna o produto em um objeto', async () => {
         const result = {
@@ -270,8 +270,8 @@ describe('Testa productsModel', () => {
           "name": "produto B",
           "quantity": 20
         };
-        const id = await productsModel.getById(2);
-        expect(id).to.be.deep.equal(result);
+        const productId = await productsModel.getById(2);
+        expect(productId).to.be.deep.equal(result);
       });
     });
     describe('Ao retornar um erro', () => {
@@ -417,7 +417,7 @@ describe('Testa salesModel', () => {
       });
     });
   });
-  describe('Testa id', () => {
+  describe('Testa saleID', () => {
     describe('Ao retornar um erro', () => {
       const error = { error: true, codeStatus: 500, message: 'Internal Server Error' }
       before(async () => {
@@ -427,11 +427,11 @@ describe('Testa salesModel', () => {
         connection.execute.restore();
       });
       it('Retorna a mensagem de erro', async () => {
-        const id = await salesModel.id();
+        const id = await salesModel.saleID();
         expect(id).to.be.deep.equal(error);
       });
       it('A mensagem possui as propriedades "error", "codeStatus" e "message"', async () => {
-        const id = await salesModel.id();
+        const id = await salesModel.saleID();
         expect(id).to.be.a('object');
         expect(id).to.have.property('error');
         expect(id).to.have.property('codeStatus');
