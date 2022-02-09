@@ -21,4 +21,34 @@ describe('Testa productsController', () => {
       });
     });
   });
+  describe('Testa getAll', () => {
+    describe('Ao buscar todos os produtos com sucesso', () => {
+      const res = {};
+      const req = {};
+      before(() => {
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(productsService, 'getAll').resolves(true);
+      });
+      after(() => productsService.getAll.restore());
+      it('Retorna o status 200', async () => {
+        await productsController.getAll(req, res);
+        expect(res.status.calledWith(200)).to.be.equal(true);
+      });
+    });
+    describe('Ao retornar um erro', () => {
+      const res = {};
+      const req = {};
+      before(() => {
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(productsService, 'getAll').rejects(true);
+      });
+      after(() => productsService.getAll.restore());
+      it('Retorna o status 500', async () => {
+        await productsController.getAll(req, res);
+        expect(res.status.calledWith(500)).to.be.equal(false);
+      });      
+    });
+  });
 });
