@@ -98,4 +98,38 @@ describe('Testa productsController', () => {
       });      
     });
   });
+  describe('Testa updateProduct', () => {
+    describe('Ao atualizar um produto com sucesso', () => {
+      const res = {};
+      const req = {};
+      before(() => {
+        req.params = { id: 1 };
+        req.body = { "name": "produto", "quantity": 10 };
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(productsService, 'updateProduct').resolves(true);
+      });
+      after(() => productsService.updateProduct.restore());
+      it('Retorna o status 200', async () => {
+        await productsController.updateProduct(req, res);
+        expect(res.status.calledWith(200)).to.be.equal(true);
+      });
+    });
+    describe('Ao retornar um erro', () => {
+      const res = {};
+      const req = {};
+      before(() => {
+        req.params = { id: 1 };
+        req.body = { "name": "produto", "quantity": 10 };
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(productsService, 'updateProduct').rejects(true);
+      });
+      after(() => productsService.updateProduct.restore());
+      it('Retorna o status 500', async () => {
+        await productsController.updateProduct(req, res);
+        expect(res.status.calledWith(500)).to.be.equal(false);
+      });
+    });
+  });
 });
