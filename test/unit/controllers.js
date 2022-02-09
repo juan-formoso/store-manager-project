@@ -51,4 +51,51 @@ describe('Testa productsController', () => {
       });      
     });
   });
+  describe('Testa getById', () => {
+    describe('Se o produto não for encontrado', () => {
+      const res = {};
+      const req = {};
+      before(() => {
+        req.params = { id: 1 };
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(productsService, 'getById').resolves(false);
+      });
+      after(() => productsService.getById.restore());
+      it('Retorna o status 404', async () => {
+        await productsController.getById(req, res);
+        expect(res.status.calledWith(404)).to.be.equal(true);
+      });
+    });
+    describe('Ao buscar o produto com sucesso de acordo com o id', () => {
+      const res = {};
+      const req = {};
+      before(() => {
+        req.params = { id: 1 };
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(productsService, 'getById').resolves(true);
+      });
+      after(() => productsService.getById.restore());
+      it('Retorna o status 200', async () => {
+        await productsController.getById(req, res);
+        expect(res.status.calledWith(200)).to.be.equal(false);
+      });
+    });
+    describe('Ao retornar um erro', () => {
+      const res = {};
+      const req = {};
+      before(() => {
+        req.params = { id: 1 };
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(productsService, 'getById').rejects(true);
+      });
+      after(() => productsService.getById.restore());
+      it('Retorna o status 500', async () => {
+        await productsController.getById(req, res);
+        expect(res.status.calledWith(500)).to.be.equal(false);
+      });      
+    });
+  });
 });
