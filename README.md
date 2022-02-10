@@ -71,25 +71,3 @@ PORT=3000
 ```
 
 **Nota**: A variável **PORT** do arquivo `.env` deve ser utilizada para a conexão com o servidor. É importante utilizar essa variável para os testes serem executados corretamente.
-
-### Tabelas
-
-Na raiz do projeto existe o arquivo `StoreManager.sql` que será usado para rodar os testes. Você pode importá-lo localmente para testar o comportamento da aplicação.
-
-O banco terá três tabelas: `products`, `sales` e `sales_products`.
-
-A tabela `products` tem o seguinte formato:
-
-![Tabela Produtos](./public/tableproducts.png)
-
-(O id será gerado automaticamente)
-
-A tabela `sales` tem o seguinte formato:
-
-![Tabela Vendas](./public/tablesales.png)
-
-(O id e date são gerados automaticamente)
-
-A tabela `sales_products`, é a tabela que faz o relacionamento `N:N` entre `products` e `sales` e tem o seguinte formato:
-
-![Tabela Vendas-Produtos](./public/tablesalesproducts.png)
