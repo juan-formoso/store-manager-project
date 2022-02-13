@@ -35,7 +35,7 @@ Requisições:
   * Entre na pasta do repositório clonado:
     * `cd store-manager-project`
 
-2. Instale as dependências e restaure o arquivo `talkers.json`
+2. Instale as dependências
   * `npm install`
 
 3. Crie uma branch a partir da branch `main`
