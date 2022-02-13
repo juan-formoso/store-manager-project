@@ -31,7 +31,7 @@ Requisições:
 ## Clonando o repositório:
 
 1. Clone o repositório
-  * `git clone https://github.com/tryber/sd-014-b-store-manager.git`.
+  * `git clone https://github.com/juan-formoso/store-manager-project.git`.
   * Entre na pasta do repositório clonado:
     * `cd store-manager-project`
 
