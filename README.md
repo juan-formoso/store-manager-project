@@ -31,7 +31,7 @@ Requisições:
 ## Clonando o repositório:
 
 1. Clone o repositório
-  * `git clone https://github.com/juan-formoso/store-manager-project.git`.
+  * `git clone git@github.com:juan-formoso/store-manager-project.git`.
   * Entre na pasta do repositório clonado:
     * `cd store-manager-project`
 
